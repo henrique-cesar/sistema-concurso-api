@@ -1,7 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
     const Conteudo = sequelize.define("conteudo", {
         id_conteudo: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
         },
         titulo: {
             type: Sequelize.STRING(45)

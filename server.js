@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
+const conteudo = require("./src/route/conteudo.route.js");
 
 var app = express();
 var bodyParser = require("body-parser");
@@ -15,5 +16,6 @@ app.use(
 		origin: "*"
 	})
 );
-app.listen(3306);
+app.use("/conteudo", conteudo);
+app.listen(4000);
 module.exports = app;

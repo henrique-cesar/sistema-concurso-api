@@ -35,10 +35,9 @@ db.cargo.belongsTo(db.concurso, {foreignKey: "id_concurso"});
 
 db.conteudo.belongsToMany(db.cargo, {through: "cargoconteudo"});
 db.cargo.belongsToMany(db.conteudo, {through: "cargoconteudo"});
-/*
 
-db.people.hasOne(db.object, {foreignKey: "idPeople"});
-db.object.belongsTo(db.people, {foreignKey: "idPeople"});
-*/
+db.conteudo.belongsToMany(db.conteudo, {as: "Subconteudos", through: db.conteudoAuto});
+db.conteudoAuto.belongsTo(db.conteudo, {as: "Subconteudo", foreignKey: "id_conteudo_filho"});
+
 
 module.exports = db;
