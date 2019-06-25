@@ -2,8 +2,8 @@
 
 ### Requisitos:
 
-- [Node.js + NPM](https://nodejs.org/en/](https://nodejs.org/en/) instalados;
-- Servidor Apache + MySQL (Como [Wamp]([https://sourceforge.net/projects/wampserver/](https://sourceforge.net/projects/wampserver/)) ou [Xampp](https://www.apachefriends.org/pt_br/index.html));
+- [Node.js + NPM](https://nodejs.org/en/) instalados;
+- Servidor Apache + MySQL (Como [Wamp](https://sourceforge.net/projects/wampserver/) ou [Xampp](https://www.apachefriends.org/pt_br/index.html));
 
 ### Como executar (off-line):
 
