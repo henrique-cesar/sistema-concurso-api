@@ -1,21 +1,20 @@
 module.exports = (sequelize, Sequelize) => {
     const Prova = sequelize.define("prova", {
-        id_prova: {
-            type: Sequelize.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
+        data_prova: {
+            type: Sequelize.DATEONLY,
+            primaryKey: true
         },
         id_candidato: {
             type: Sequelize.INTEGER,
             primaryKey: true
         },
-        data_prova: {
-            type: Sequelize.DATE
-        },
         tipo: {
             type: Sequelize.STRING(8)
         },
         pontos: {
+            type: Sequelize.INTEGER
+        },
+        nota: {
             type: Sequelize.INTEGER
         }
     }, {

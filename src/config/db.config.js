@@ -16,6 +16,7 @@ const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+db.op = Sequelize.Op;
 
 db.candidato = require("../model/Candidato.js")(sequelize, Sequelize);
 db.cargo = require("../model/Cargo.js")(sequelize, Sequelize);
