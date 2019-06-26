@@ -8,8 +8,8 @@ module.exports = (sequelize, Sequelize) => {
         nome: {
             type: Sequelize.STRING(45)
         },
-        orgao: {
-            type: Sequelize.STRING(45)
+        id_orgao: {
+            type: Sequelize.INTEGER
         },
         ano: {
             type: Sequelize.INTEGER

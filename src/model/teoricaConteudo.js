@@ -1,9 +1,12 @@
 module.exports = (sequelize, Sequelize) => {
-    const ProvaConteudo = sequelize.define("provaconteudo", {
-        id_prova: {
+    const TeoricaConteudo = sequelize.define("teorica_conteudo", {
+        data_realizacao: {
+            type: Sequelize.DATEONLY,
+            primaryKey: true
+        },
+        id_candidato: {
             type: Sequelize.INTEGER,
-		    primaryKey: true,
-		    foreignKey: true
+            primaryKey: true
         },
         id_conteudo: {
             type: Sequelize.INTEGER,
@@ -12,8 +15,8 @@ module.exports = (sequelize, Sequelize) => {
         }
     }, {
         freezeTableName: true,
-        tablename: "provaconteudo",
+        tablename: "teorica_conteudo",
         timestamps: false
     });
-    return ProvaConteudo;
+    return TeoricaConteudo;
 }

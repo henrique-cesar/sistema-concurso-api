@@ -24,8 +24,11 @@ db.cargoConteudo = require("../model/CargoConteudo.js")(sequelize, Sequelize);
 db.concurso = require("../model/Concurso.js")(sequelize, Sequelize);
 db.conteudo = require("../model/Conteudo.js")(sequelize, Sequelize);
 db.conteudoAuto = require("../model/ConteudoAuto.js")(sequelize, Sequelize);
+db.orgao = require("../model/Orgao.js")(sequelize, Sequelize);
 db.prova = require("../model/Prova.js")(sequelize, Sequelize);
-db.provaConteudo = require("../model/ProvaConteudo.js")(sequelize, Sequelize);
+db.provaPontos = require("../model/pPontos.js")(sequelize, Sequelize);
+db.provaTeorica = require("../model/pTeorica.js")(sequelize, Sequelize);
+db.teoricaConteudo = require("../model/teoricaConteudo.js")(sequelize, Sequelize);
 
 //Relações do banco
 db.candidato.hasMany(db.prova, {foreignKey: "id_candidato"});

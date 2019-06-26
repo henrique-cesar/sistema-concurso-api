@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Prova = sequelize.define("prova", {
+    const ProvaTeorica = sequelize.define("p_teorica", {
         data_realizacao: {
             type: Sequelize.DATEONLY,
             primaryKey: true
@@ -8,13 +8,13 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             primaryKey: true
         },
-        id_cargo: {
+        nota: {
             type: Sequelize.INTEGER
         }
     }, {
         freezeTableName: true,
-        tablename: "prova",
+        tablename: "p_teorica",
         timestamps: false
     });
-    return Prova;
+    return ProvaTeorica;
 }

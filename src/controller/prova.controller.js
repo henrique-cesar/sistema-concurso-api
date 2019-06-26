@@ -1,26 +1,43 @@
 const db = require("../config/db.config");
-const Candidato = db.candidato;
 const Prova = db.prova;
+const ProvaPontos = db.pPontos;
+const ProvaTeorica = db.pTeorica;
+const Candidato = db.candidato;
+const CargoConteudo = db.cargoConteudo;
+const TeoricaConteudo = db.teoricaConteudo;
 const Op = db.op;
 
 exports.create = async function(req, res){
     try {
         const candidato = await Candidato.findByPk(req.body.idCandidato);
         if (candidato) {
-            var prova;
+            const prova = await Prova.create({
+                data_realizacao: req.body.dataProva,
+                id_candidato: req.body.idCandidato,
+            });
             if (req.body.tipo == "teorica") {
-                prova = await Prova.create({
-                    data_prova: req.body.dataProva,
-                    id_candidato: req.body.idCandidato,
-                    tipo: "titulos",
-                    pontos: req.body.pontos
+                await ProvaTeorica.create({
+                    data_realizacao: req.body.dataProva,
+                    id_candidato: req.body.idCandidato
                 });
+                conteudos = await CargoConteudo.findAll({
+                    attributtes: ["id_conteudo"],
+                    where: {
+                        id_cargo: req.body.idCargo
+                    },
+                    raw: true
+                });
+                for (c in conteudos) {
+                    await TeoricaConteudo.create({
+                        data_realizacao: req.body.dataRealizacao,
+                        id_candidato: req.body.idCandidato,
+                        id_conteudo: conteudos[c].id_conteudo
+                    });
+                }
             } else {
-                prova = await Prova.create({
-                    data_prova: req.body.dataProva,
-                    id_candidato: req.body.idCandidato,
-                    tipo: "teorica",
-                    nota: req.body.nota
+                await ProvaPontos.create({
+                    data_realizacao: req.body.dataProva,
+                    id_candidato: req.body.idCandidato
                 });
             }
             if (prova) {
@@ -37,11 +54,11 @@ exports.create = async function(req, res){
 exports.updateData = async function(req, res) {
     try {
         const prova = await Prova.update({
-            data_prova: req.body.dataNova
+            data_realizacao: req.body.dataNova
         },{
             where: {
                 id_candidato: req.body.idCandidato,
-                data_prova: req.body.dataAntiga
+                data_realizacao: req.body.dataAntiga
             }
         });
         if (prova[0]) {
@@ -59,14 +76,14 @@ exports.delete = async function(req, res) {
         const prova = await Prova.findOne({
             where: {
                 id_candidato: req.body.idCandidato,
-                data_prova: req.body.data
+                data_realizacao: req.body.data
             }
         });
         if (prova) {
             await Prova.destroy({
                 where: {
                     id_candidato: req.body.idCandidato,
-                    data_prova: req.body.data
+                    data_realizacao: req.body.data
                 }
             });
             return res.status(200).send({success: true, alert: "Prova deletada com sucesso."});
@@ -86,7 +103,7 @@ exports.findOne = async function(req, res) {
         const prova = await Prova.findOne({
             where: {
                 id_candidato: req.params.idCandidato,
-                data_prova: date
+                data_realizacao: date
             }
         });
         if (prova) {
@@ -116,7 +133,7 @@ exports.findAllByPeriodo = async function(req, res) {
         const provas = await Prova.findAll({
             where: {
                 id_candidato: req.params.idCandidato,
-                data_prova: {
+                data_realizacao: {
                     [Op.between]: [req.query.dataInicio, req.query.dataFim]
                 }
             }
