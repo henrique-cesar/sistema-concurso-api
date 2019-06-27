@@ -22,6 +22,10 @@ router.get("/:idConcurso/cargos", cargo.findAll);
 
 router.put("/:idConcurso/cargo/:idCargo/update", cargo.update);
 
-router.delete("/:idConcurso/cargo/:idCargo/update", cargo.delete);
+router.delete("/:idConcurso/cargo/:idCargo/delete", cargo.delete);
+
+router.post("/:idConcurso/cargo/:idCargo/add", cargo.addConteudo2Cargo);
+
+router.get("/:idConcurso/cargo/:idCargo/conteudos", cargo.getConteudosByCargo);
 
 module.exports = router;

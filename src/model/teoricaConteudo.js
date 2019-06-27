@@ -12,6 +12,9 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             primaryKey: true,
             foreignKey: true
+        },
+        cod_dificuldade: {
+            type: Sequelize.INTEGER
         }
     }, {
         freezeTableName: true,

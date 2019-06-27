@@ -12,6 +12,7 @@ exports.create = async function(req, res) {
         if (orgao) {
             const concurso = await Concurso.create({
                 id_orgao: req.body.idOrgao,
+                nome: req.body.nome,
                 ano: req.body.ano
             });
             if (concurso) {
@@ -44,7 +45,11 @@ exports.update = async function(req, res){
 
 exports.findOne = async function(req, res){
     try {
-        const concurso = await Concurso.findByPk(req.params.idConcurso);
+        const concurso = await Concurso.findOne({
+            attributes: ["nome", "ano"],
+            where: { id_concurso: req.params.idConcurso},
+            include: [{model: Orgao}]
+        });
         if (concurso) {
             return res.status(200).send(concurso);
         }
@@ -57,6 +62,7 @@ exports.findOne = async function(req, res){
 exports.findAll = async function(req, res){
     try {
         const concursos = await Concurso.findAll({
+            attributes: { exclude: ["id_orgao"]},
             where: {
                 id_orgao: req.params.idOrgao
             }
