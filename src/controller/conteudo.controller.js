@@ -3,6 +3,7 @@ const Conteudo = db.conteudo;
 const ConteudoAuto = db.conteudoAuto;
 
 exports.create = async function(req, res){
+    console.log(req.body)
     try {
         const conteudo = await Conteudo.create({
             titulo: req.body.titulo,
@@ -60,6 +61,18 @@ exports.findAll = async function(req, res){
     } catch(err) {
         console.log(err);
         return res.status(500).send({success: false, alert: "Não foi possível listar todos os conteúdos."})
+    }
+}
+
+exports.findByPk = async function(req, res){
+    try {
+        const conteudo = await Conteudo.findByPk(req.params.id);
+        if (conteudo) {
+            return res.status(200).send(conteudo);
+        }
+        return res.status(404).send({success: false, alert: "Conteudo não encontrado."});
+    } catch (err) {
+        return res.status(500).send({success: false, alert: "Não foi possível localizar o conteúdo."});
     }
 }
 
