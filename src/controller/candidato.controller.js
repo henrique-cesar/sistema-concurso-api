@@ -45,6 +45,22 @@ exports.findOne = async function(req, res){
     }
 }
 
+exports.findByNome = async function(req, res){
+    try {
+        const candidato = await Candidato.findOne({
+            where: {
+                nome: req.params.nome
+            }
+        });
+        if (candidato) {
+            return res.status(200).send(candidato);
+        }
+        return res.status(404).send({success: false, alert: "Candidato não encontrado."});
+    } catch (err) {
+        return res.status(500).send({success: false, alert: "Não foi possível localizar o candidato."});
+    }
+}
+
 exports.findAll = async function(req, res){
     try {
         const candidatos = await Candidato.findAll();

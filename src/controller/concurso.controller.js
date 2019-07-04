@@ -3,6 +3,7 @@ const Orgao = db.orgao;
 const Concurso = db.concurso;
 
 exports.create = async function(req, res) {
+    console.log(req.body)
     try {
         const orgao = await Orgao.findOne({
             where: {
@@ -16,7 +17,7 @@ exports.create = async function(req, res) {
                 ano: req.body.ano
             });
             if (concurso) {
-                res.status(201).send({success: true, alert: "Concurso cadastrado."});
+                res.status(201).send({success: true, alert: "Concurso cadastrado.", concurso});
             }
         }
     } catch (err) {
@@ -67,6 +68,18 @@ exports.findAll = async function(req, res){
                 id_orgao: req.params.idOrgao
             }
         });
+        if (concursos) {
+            return res.status(200).send(concursos);
+        }
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send({success: false, alert: "Não foi possível listar todos os concursos."})
+    }
+}
+
+exports.findAllConc = async function(req, res){
+    try {
+        const concursos = await Concurso.findAll();
         if (concursos) {
             return res.status(200).send(concursos);
         }

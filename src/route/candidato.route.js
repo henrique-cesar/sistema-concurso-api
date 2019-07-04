@@ -11,6 +11,8 @@ router.get('/all', candidato.findAll);
 
 router.get("/:id", candidato.findOne);
 
+router.get("/name/:nome", candidato.findByNome);
+
 router.put('/delete/:id', candidato.deleteCandidato);
 
 module.exports = router;

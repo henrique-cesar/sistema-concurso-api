@@ -6,6 +6,7 @@ const Conteudo = db.conteudo;
 const Dificuldade = db.dificuldade;
 
 exports.create = async function(req, res) {
+    console.log("Cargo" + req.body)
     try {
         const concurso = await Concurso.findOne({
             where: {

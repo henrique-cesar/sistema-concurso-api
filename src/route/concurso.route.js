@@ -6,6 +6,8 @@ const cargo = require("../controller/cargo.controller");
 
 router.post("/create", concurso.create);
 
+router.get("/all", concurso.findAllConc)
+
 router.get("/:idConcurso", concurso.findOne);
 
 router.get("/:idOrgao/all", concurso.findAll);
